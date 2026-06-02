@@ -4,8 +4,6 @@ A **full-stack MERN-style** clone inspired by [Zerodha](https://zerodha.com/). T
 
 This README explains what the project does, how each part works, where data is stored, how to run everything, and how to view data in the browser or database.
 
-> **Preparing for interviews?** Read **[PROJECT_INTERVIEW_GUIDE.md](./PROJECT_INTERVIEW_GUIDE.md)** — full project explanation, fresher interview questions, and sample answers.
-
 ---
 
 ## Table of contents
