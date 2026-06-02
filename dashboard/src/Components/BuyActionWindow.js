@@ -1,29 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
 
 import GeneralContext from "./GeneralContext";
+import { API_BASE_URL } from "../config";
 
 import "./BuyActionWindow.css";
 
 const BuyActionWindow = ({ uid }) => {
+  const { closeBuyWindow } = useContext(GeneralContext);
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
 
   const handleBuyClick = () => {
-    axios.post("http://localhost:3002/newOrder", {
-      name: uid,
-      qty: stockQuantity,
-      price: stockPrice,
-      mode: "BUY",
-    });
-
-    GeneralContext.closeBuyWindow();
+    axios
+      .post(`${API_BASE_URL}/newOrder`, {
+        name: uid,
+        qty: Number(stockQuantity),
+        price: Number(stockPrice),
+        mode: "BUY",
+      })
+      .catch((err) => {
+        console.error("Failed to place order:", err.message);
+      })
+      .finally(() => {
+        closeBuyWindow();
+      });
   };
 
   const handleCancelClick = () => {
-    GeneralContext.closeBuyWindow();
+    closeBuyWindow();
   };
 
   return (
